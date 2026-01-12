@@ -1,10 +1,14 @@
 import { motion } from "framer-motion";
 import { Plane, Gamepad2, Target } from "lucide-react";
 
-const PersonalSection = () => {
-  return (
-    <section id="personal" className="py-24">
-      <div className="container mx-auto px-6">
+interface PersonalSectionProps {
+  embedded?: boolean;
+}
+
+const PersonalSection = ({ embedded = false }: PersonalSectionProps) => {
+  const content = (
+    <>
+      {!embedded && (
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -19,69 +23,77 @@ const PersonalSection = () => {
             The person behind the professional — passions that shape perspective.
           </p>
         </motion.div>
+      )}
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Digital Nomad */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="glass p-8 rounded-2xl hover-glow text-center"
-          >
-            <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl flex items-center justify-center">
-              <Plane className="w-8 h-8 text-primary" />
-            </div>
-            <h3 className="font-display text-2xl font-bold mb-4">Digital Nomad</h3>
-            <p className="text-5xl font-bold text-gradient mb-2">2+</p>
-            <p className="text-muted-foreground mb-4">Years of Remote Travel</p>
+      <div className={`grid grid-cols-1 ${embedded ? 'md:grid-cols-3 gap-4' : 'md:grid-cols-3 gap-8'}`}>
+        {/* Digital Nomad */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          viewport={{ once: true }}
+          className={`glass rounded-2xl hover-glow text-center ${embedded ? 'p-5' : 'p-8'}`}
+        >
+          <div className={`${embedded ? 'w-12 h-12 mb-4' : 'w-16 h-16 mb-6'} mx-auto bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl flex items-center justify-center`}>
+            <Plane className={`${embedded ? 'w-6 h-6' : 'w-8 h-8'} text-primary`} />
+          </div>
+          <h3 className={`font-display font-bold mb-2 ${embedded ? 'text-lg' : 'text-2xl mb-4'}`}>Digital Nomad</h3>
+          <p className={`font-bold text-gradient mb-1 ${embedded ? 'text-3xl' : 'text-5xl mb-2'}`}>2+</p>
+          <p className={`text-muted-foreground ${embedded ? 'text-xs mb-2' : 'mb-4'}`}>Years of Remote Travel</p>
+          {!embedded && (
             <p className="text-sm text-muted-foreground leading-relaxed">
               Working remotely while exploring new cultures — every destination brings fresh perspective to problem-solving and product thinking.
             </p>
-          </motion.div>
+          )}
+        </motion.div>
 
-          {/* Chess */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="glass p-8 rounded-2xl hover-glow text-center"
-          >
-            <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-secondary/20 to-orange-400/20 rounded-2xl flex items-center justify-center">
-              <Target className="w-8 h-8 text-secondary" />
-            </div>
-            <h3 className="font-display text-2xl font-bold mb-4">Chess Enthusiast</h3>
-            <p className="text-muted-foreground mb-6">
-              Strategy & Pattern Recognition
-            </p>
+        {/* Chess */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+          className={`glass rounded-2xl hover-glow text-center ${embedded ? 'p-5' : 'p-8'}`}
+        >
+          <div className={`${embedded ? 'w-12 h-12 mb-4' : 'w-16 h-16 mb-6'} mx-auto bg-gradient-to-br from-secondary/20 to-orange-400/20 rounded-2xl flex items-center justify-center`}>
+            <Target className={`${embedded ? 'w-6 h-6' : 'w-8 h-8'} text-secondary`} />
+          </div>
+          <h3 className={`font-display font-bold mb-2 ${embedded ? 'text-lg' : 'text-2xl mb-4'}`}>Chess Enthusiast</h3>
+          <p className={`text-muted-foreground ${embedded ? 'text-xs mb-2' : 'mb-6'}`}>
+            Strategy & Pattern Recognition
+          </p>
+          {!embedded && (
             <p className="text-sm text-muted-foreground leading-relaxed">
               Chess mirrors product strategy — anticipating moves, optimizing for long-term outcomes, and making decisions with incomplete information.
             </p>
-          </motion.div>
+          )}
+        </motion.div>
 
-          {/* Badminton */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="glass p-8 rounded-2xl hover-glow text-center"
-          >
-            <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-emerald-400/20 to-teal-500/20 rounded-2xl flex items-center justify-center">
-              <Gamepad2 className="w-8 h-8 text-emerald-400" />
-            </div>
-            <h3 className="font-display text-2xl font-bold mb-4">Badminton Player</h3>
-            <p className="text-muted-foreground mb-6">
-              Speed & Agility
-            </p>
+        {/* Badminton */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+          className={`glass rounded-2xl hover-glow text-center ${embedded ? 'p-5' : 'p-8'}`}
+        >
+          <div className={`${embedded ? 'w-12 h-12 mb-4' : 'w-16 h-16 mb-6'} mx-auto bg-gradient-to-br from-emerald-400/20 to-teal-500/20 rounded-2xl flex items-center justify-center`}>
+            <Gamepad2 className={`${embedded ? 'w-6 h-6' : 'w-8 h-8'} text-emerald-400`} />
+          </div>
+          <h3 className={`font-display font-bold mb-2 ${embedded ? 'text-lg' : 'text-2xl mb-4'}`}>Badminton Player</h3>
+          <p className={`text-muted-foreground ${embedded ? 'text-xs mb-2' : 'mb-6'}`}>
+            Speed & Agility
+          </p>
+          {!embedded && (
             <p className="text-sm text-muted-foreground leading-relaxed">
               Quick reflexes, endurance, and the balance between offense and defense — skills that translate to fast-paced startup environments.
             </p>
-          </motion.div>
-        </div>
+          )}
+        </motion.div>
+      </div>
 
-        {/* Quote */}
+      {/* Quote */}
+      {!embedded && (
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -96,6 +108,18 @@ const PersonalSection = () => {
             <cite className="text-muted-foreground">— Personal Philosophy</cite>
           </blockquote>
         </motion.div>
+      )}
+    </>
+  );
+
+  if (embedded) {
+    return <div>{content}</div>;
+  }
+
+  return (
+    <section className="py-24">
+      <div className="container mx-auto px-6">
+        {content}
       </div>
     </section>
   );
